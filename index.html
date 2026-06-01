@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>介護シフトAI | ATRI AI - 介護施設向けシフト自動化システム</title>
+  <meta name="description" content="現役介護士が開発した介護施設向けAIシフト管理システム。希望休・勤務条件を考慮した自動生成で、シフト作成時間を大幅削減。無料トライアルあり。">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 背景装飾レイヤー（固定・最背面） -->
+  <div class="site-bg" aria-hidden="true">
+    <div class="site-bg-orb orb-blue"></div>
+    <div class="site-bg-orb orb-sky"></div>
+    <div class="site-bg-orb orb-teal"></div>
+    <div class="site-bg-orb orb-mint"></div>
+  </div>
+
+  <!-- ナビゲーション -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="images/logo-dark.png" alt="ATRI AI ロゴ" class="logo-img">
+        <div class="logo-text-wrap">
+          <span class="logo-text">ATRI <span class="logo-accent">AI</span></span>
+          <span class="logo-text-ja">アトリAI</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#problems">課題</a></li>
+        <li><a href="#service">サービス</a></li>
+        <li><a href="#features">特徴</a></li>
+        <li><a href="#pricing">料金</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">無料で試す</a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#problems">課題</a></li>
+      <li><a href="#service">サービス</a></li>
+      <li><a href="#features">特徴</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+      <li><a href="#contact" class="mobile-cta">無料で試す</a></li>
+    </ul>
+  </div>
+
+  <!-- ① ヒーロー -->
+  <section class="hero" id="hero">
+
+    <!-- 右側：介護現場の写真（フルハイト絶対配置） -->
+    <div class="hero-photo-area">
+      <img
+        src="images/care-scene.png"
+        alt="笑顔で高齢者に寄り添う介護士と、明るい介護施設のひとこま"
+        class="hero-photo"
+        loading="eager"
+        decoding="async"
+      >
+      <div class="hero-photo-fade"></div>
+    </div>
+
+    <!-- 下部グラデーション＋AIドットレイヤー -->
+    <div class="hero-ai-layer" aria-hidden="true"></div>
+
+    <!-- テキスト＆CTA ＋ プレビューカード -->
+    <div class="container hero-inner">
+
+      <!-- 上段：コピー -->
+      <div class="hero-content">
+
+        <div class="hero-badge">介護施設向け AI シフト管理システム</div>
+
+        <h1 class="hero-title">
+          <span class="title-block">介護現場の<span class="highlight">"あったらいい"</span></span>を、<span class="highlight">AI</span>で現実に
+        </h1>
+
+        <p class="hero-subtitle">現役介護士が開発した、介護施設向けシフト自動化システム</p>
+
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">
+            <span>無料で試す</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-secondary">お問い合わせ</a>
+        </div>
+
+      </div>
+
+      <!-- 下段：デモ画面プレビュー -->
+      <div class="hero-preview">
+
+        <div class="hprev-card" data-delay="100">
+          <img
+            src="images/demo-shift-table.png"
+            alt="シフト表画面プレビュー"
+            class="hprev-img"
+            loading="eager"
+            decoding="async"
+          >
+          <div class="hprev-label">シフト表</div>
+        </div>
+
+        <div class="hprev-card" data-delay="200">
+          <img
+            src="images/demo-summary-table.png"
+            alt="勤務集計・分析画面プレビュー"
+            class="hprev-img"
+            loading="eager"
+            decoding="async"
+          >
+          <div class="hprev-label">勤務集計・分析</div>
+        </div>
+
+        <div class="hprev-card hprev-card-phone" data-delay="300">
+          <div class="hprev-phone-inner">
+            <div class="mobile-notch"></div>
+            <div class="mobile-content">
+              <div class="mobile-app-header">介護シフトAI</div>
+              <div class="mobile-date">2025年6月1日（日）</div>
+              <div class="mobile-section-label">本日のシフト</div>
+              <div class="mobile-shift-item">
+                <span class="mobile-badge mobile-badge-early">早番</span>
+                <span class="mobile-names">田中・山本</span>
+              </div>
+              <div class="mobile-shift-item">
+                <span class="mobile-badge mobile-badge-day">日勤</span>
+                <span class="mobile-names">佐藤・高橋</span>
+              </div>
+              <div class="mobile-shift-item">
+                <span class="mobile-badge mobile-badge-night">夜勤</span>
+                <span class="mobile-names">鈴木・伊藤</span>
+              </div>
+            </div>
+          </div>
+          <div class="hprev-label">スマホ対応</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 波形ディバイダー -->
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,36 C360,70 1080,4 1440,36 L1440,72 L0,72 Z" fill="#EAF8FF"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- スタットバー（ヒーロー直下） -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-bar-inner">
+
+        <div class="stats-item">
+          <div class="stats-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="stats-body">
+            <span class="stats-feat">シフト作成の<br>時間を削減</span>
+          </div>
+        </div>
+
+        <div class="stats-sep"></div>
+
+        <div class="stats-item">
+          <div class="stats-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="7" r="4"/>
+              <path d="M4 21v-1a8 8 0 0116 0v1"/>
+            </svg>
+          </div>
+          <div class="stats-body">
+            <span class="stats-feat">職員の希望を<br>自動で調整</span>
+          </div>
+        </div>
+
+        <div class="stats-sep"></div>
+
+        <div class="stats-item">
+          <div class="stats-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+          <div class="stats-body">
+            <span class="stats-feat">公平で最適な<br>シフトを実現</span>
+          </div>
+        </div>
+
+        <div class="stats-sep"></div>
+
+        <div class="stats-item">
+          <div class="stats-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polyline points="20 12 20 22 4 22 4 12"/>
+              <rect x="2" y="7" width="20" height="5"/>
+              <line x1="12" y1="22" x2="12" y2="7"/>
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+            </svg>
+          </div>
+          <div class="stats-body">
+            <span class="stats-feat">初期費用<br><strong class="stats-zero">0円</strong></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ② シフト作成の悩み共感セクション -->
+  <section class="shift-stress" id="shift-stress">
+    <div class="container">
+      <div class="shift-stress-inner">
+
+        <!-- 左：テキスト -->
+        <div class="shift-stress-text" data-delay="0">
+          <span class="section-label">SHIFT PROBLEM</span>
+          <h2 class="shift-stress-title">毎月のシフト作成、<br>こんな悩みありませんか？</h2>
+          <ul class="shift-stress-list">
+            <li>
+              <span class="stress-icon">😓</span>
+              <div>
+                <strong>希望休の調整が毎月大変</strong>
+                <p>スタッフ全員の希望をまとめて、条件をすり合わせるだけで何時間も...</p>
+              </div>
+            </li>
+            <li>
+              <span class="stress-icon">🌙</span>
+              <div>
+                <strong>夜勤バランスで悩み続ける</strong>
+                <p>夜勤の回数・連続勤務・インターバル...考慮することが多すぎる</p>
+              </div>
+            </li>
+            <li>
+              <span class="stress-icon">⏰</span>
+              <div>
+                <strong>作成だけで何時間もかかる</strong>
+                <p>休日や残業を使ってシフト作成。本来の業務に集中できない</p>
+              </div>
+            </li>
+            <li>
+              <span class="stress-icon">😤</span>
+              <div>
+                <strong>毎月サービス残業になっている</strong>
+                <p>シフト調整のために、気づけば自分だけ残っている状況が続く</p>
+              </div>
+            </li>
+            <li>
+              <span class="stress-icon">📉</span>
+              <div>
+                <strong>急な欠勤でシフトが崩れる</strong>
+                <p>やっと完成したのに急な連絡で一から調整。疲弊感が積み重なる</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 右：画像エリア -->
+        <div class="shift-stress-image">
+
+          <!-- 上：メイン画像 -->
+          <div class="stress-photo-wrap" data-delay="200">
+            <img
+              src="images/shift-stress.png"
+              alt="シフト作成に追われる介護士"
+              class="stress-photo"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+
+          <!-- 下：共感カード（画像 + テキストオーバーレイ） -->
+          <div class="stress-alone-wrap" data-delay="380">
+            <div class="stress-alone-card">
+              <img
+                src="images/shift-alone.png"
+                alt="残業するシフト担当者"
+                class="stress-alone-photo"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="stress-alone-caption">
+                <p class="stress-alone-quote">気づけば、自分だけ残っていた。</p>
+                <p class="stress-alone-sub">毎月のシフト作成が、重荷になっていませんか？</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ 悩み・課題 -->
+  <section class="problems" id="problems">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">PROBLEM</span>
+        <h2 class="section-title">こんなお悩み<br>ありませんか？</h2>
+      </div>
+
+      <div class="problems-grid">
+        <div class="problem-card" data-delay="0">
+          <div class="problem-icon">⏰</div>
+          <p>シフト作成に<strong>何時間も</strong>かかる</p>
+        </div>
+        <div class="problem-card" data-delay="100">
+          <div class="problem-icon">📅</div>
+          <p>希望休の調整が<strong>大変</strong></p>
+        </div>
+        <div class="problem-card" data-delay="200">
+          <div class="problem-icon">🌙</div>
+          <p>夜勤の<strong>偏り調整</strong>が難しい</p>
+        </div>
+        <div class="problem-card" data-delay="300">
+          <div class="problem-icon">📊</div>
+          <p>毎月<strong>サービス残業</strong>になっている</p>
+        </div>
+        <div class="problem-card" data-delay="400">
+          <div class="problem-icon">😓</div>
+          <p>作成担当者の<strong>負担</strong>が大きい</p>
+        </div>
+      </div>
+
+      <div class="problems-solution">
+        <p>これらすべての課題、<span class="highlight-text">介護シフトAI</span>が解決します</p>
+        <svg class="arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ サービス説明 -->
+  <section class="service" id="service">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">SOLUTION</span>
+        <h2 class="section-title">介護シフトAIで<br>解決できます</h2>
+        <p class="section-desc">現場の課題に寄り添った、実用的な機能を提供します</p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card" data-delay="0">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3>希望休・勤務条件を考慮した自動生成</h3>
+          <p>スタッフの希望休や勤務条件を入力するだけで、AIが最適なシフトを自動生成します。</p>
+        </div>
+        <div class="service-card" data-delay="100">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+          </div>
+          <h3>フロア別の条件設定</h3>
+          <p>フロアごとに必要スタッフ数や資格条件を個別設定。複数フロアを持つ施設でも対応可能です。</p>
+        </div>
+        <div class="service-card" data-delay="200">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <h3>Excel出力対応</h3>
+          <p>作成したシフトはExcel形式で出力可能。既存の業務フローに合わせてそのまま活用できます。</p>
+        </div>
+        <div class="service-card" data-delay="300">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3>現場運用を意識した設計</h3>
+          <p>実際の介護現場での経験をもとに設計。直感的な操作で誰でもすぐに使いこなせます。</p>
+        </div>
+        <div class="service-card" data-delay="400">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3>シフト調整時間の大幅削減</h3>
+          <p>数時間かかっていたシフト作成を大幅に短縮。担当者の負担を根本から解消します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 強み・特徴 -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">FEATURES</span>
+        <h2 class="section-title">現場目線だから、<br>本当に使いやすい</h2>
+      </div>
+
+      <div class="features-content">
+        <div class="features-text">
+          <div class="feature-item" data-delay="0">
+            <div class="feature-dot"></div>
+            <div>
+              <h3>現役介護士が開発</h3>
+              <p>実際にシフト作成の苦労を経験した現役介護士が開発。"使える"機能だけを厳選しています。</p>
+            </div>
+          </div>
+          <div class="feature-item" data-delay="100">
+            <div class="feature-dot"></div>
+            <div>
+              <h3>現場の声を反映</h3>
+              <p>実際の介護現場でのフィードバックをもとに、継続的に機能を改善しています。</p>
+            </div>
+          </div>
+          <div class="feature-item" data-delay="200">
+            <div class="feature-dot"></div>
+            <div>
+              <h3>施設ごとに調整可能</h3>
+              <p>施設の規模や運営方針に合わせてカスタマイズ可能。導入後のサポートも充実しています。</p>
+            </div>
+          </div>
+          <div class="feature-item" data-delay="300">
+            <div class="feature-dot"></div>
+            <div>
+              <h3>中小施設でも導入しやすい</h3>
+              <p>大規模なシステム投資は不要。月額10,000円〜の手軽な価格でスタートできます。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="features-visual">
+
+          <!-- 成功イメージカード（上） -->
+          <div class="success-card">
+            <div class="success-photo-wrap">
+              <img
+                src="images/shift-success.png"
+                alt="シフト作成がラクになった介護士"
+                class="success-photo"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="success-caption">
+              <p class="success-quote">"やっと終わった…"から、<br>"すぐ終わった！"へ。</p>
+              <p class="success-sub">シフト作成の時間を、本来の介護へ。</p>
+            </div>
+          </div>
+
+          <!-- AIカード（下） -->
+          <div class="ai-card">
+            <div class="ai-card-header">
+              <div class="ai-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span>介護シフトAI — 生成処理中</span>
+            </div>
+            <div class="ai-card-body">
+              <div class="ai-progress">
+                <div class="ai-progress-bar" id="aiProgressBar"></div>
+              </div>
+              <div class="ai-items">
+                <div class="ai-item">
+                  <span class="ai-check">✓</span>
+                  <span>希望休の確認完了</span>
+                </div>
+                <div class="ai-item">
+                  <span class="ai-check">✓</span>
+                  <span>夜勤バランス調整完了</span>
+                </div>
+                <div class="ai-item">
+                  <span class="ai-check">✓</span>
+                  <span>フロア人数チェック完了</span>
+                </div>
+                <div class="ai-item ai-item-active">
+                  <span class="ai-check ai-spin">⟳</span>
+                  <span>最適化処理中...</span>
+                </div>
+              </div>
+              <div class="ai-result">
+                <span>シフト生成完了まで</span>
+                <span class="ai-time">約30秒</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ デモ画面 -->
+  <section class="demo" id="demo">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">DEMO</span>
+        <h2 class="section-title">実際の画面イメージ</h2>
+        <p class="section-desc">シンプルで見やすいUIで、誰でも直感的に操作できます</p>
+      </div>
+
+      <div class="demo-grid">
+        <div class="demo-card demo-card-shift" data-delay="0">
+          <div class="demo-screen demo-screen-photo">
+            <img
+              src="images/demo-shift-table.png"
+              alt="介護シフトAI シフト表画面"
+              class="demo-screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <p class="demo-label">シフト表画面</p>
+        </div>
+
+        <div class="demo-card demo-card-summary" data-delay="150">
+          <div class="demo-screen demo-screen-photo">
+            <img
+              src="images/demo-summary-table.png"
+              alt="介護シフトAI 勤務集計・分析画面"
+              class="demo-screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <p class="demo-label">勤務集計・分析画面</p>
+        </div>
+
+        <div class="demo-card demo-card-mobile" data-delay="300">
+          <div class="demo-screen demo-screen-center">
+            <div class="mobile-frame">
+              <div class="mobile-notch"></div>
+              <div class="mobile-content">
+                <div class="mobile-app-header">介護シフトAI</div>
+                <div class="mobile-date">2025年6月1日（日）</div>
+                <div class="mobile-section-label">本日のシフト</div>
+                <div class="mobile-shift-item">
+                  <span class="mobile-badge mobile-badge-early">早番</span>
+                  <span class="mobile-names">田中・山本</span>
+                </div>
+                <div class="mobile-shift-item">
+                  <span class="mobile-badge mobile-badge-day">日勤</span>
+                  <span class="mobile-names">佐藤・高橋</span>
+                </div>
+                <div class="mobile-shift-item">
+                  <span class="mobile-badge mobile-badge-night">夜勤</span>
+                  <span class="mobile-names">鈴木・伊藤</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="demo-label">スマホ対応画面</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ 導入の流れ -->
+  <section class="flow" id="flow">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">FLOW</span>
+        <h2 class="section-title">導入までの流れ</h2>
+        <p class="section-desc">最短1週間で導入が可能です</p>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step" data-delay="0">
+          <div class="flow-number">01</div>
+          <div class="flow-icon">📧</div>
+          <h3>お問い合わせ</h3>
+          <p>まずはお気軽にご連絡ください。メールまたはInstagramでお受けしています。</p>
+        </div>
+        <div class="flow-connector"><span>›</span></div>
+        <div class="flow-step" data-delay="100">
+          <div class="flow-number">02</div>
+          <div class="flow-icon">💬</div>
+          <h3>ヒアリング</h3>
+          <p>施設の規模や運営状況、課題をヒアリングし、最適な導入プランをご提案します。</p>
+        </div>
+        <div class="flow-connector"><span>›</span></div>
+        <div class="flow-step" data-delay="200">
+          <div class="flow-number">03</div>
+          <div class="flow-icon">🆓</div>
+          <h3>無料トライアル</h3>
+          <p>実際のシフト作成を通じて、使用感をお試しいただけます。費用は一切かかりません。</p>
+        </div>
+        <div class="flow-connector"><span>›</span></div>
+        <div class="flow-step" data-delay="300">
+          <div class="flow-number">04</div>
+          <div class="flow-icon">🚀</div>
+          <h3>導入開始</h3>
+          <p>サポートを受けながら本格導入。導入後も継続的にフォローいたします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ 料金プラン -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">PRICING</span>
+        <h2 class="section-title">料金プラン</h2>
+        <p class="section-desc">施設の規模に応じた柔軟な料金設定</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="pricing-card" data-delay="0">
+          <div class="pricing-badge">おすすめ</div>
+          <h3 class="pricing-name">スタンダードプラン</h3>
+          <div class="pricing-price">
+            <span class="price-from">月額</span>
+            <span class="price-amount">¥10,000</span>
+            <span class="price-unit">〜</span>
+          </div>
+          <p class="pricing-note">※ 施設規模に応じてご相談可能</p>
+          <ul class="pricing-features">
+            <li><span class="feature-check">✓</span><span>シフト自動生成（AI）</span></li>
+            <li><span class="feature-check">✓</span><span>希望休・勤務条件設定</span></li>
+            <li><span class="feature-check">✓</span><span>フロア別条件設定</span></li>
+            <li><span class="feature-check">✓</span><span>Excel出力</span></li>
+            <li><span class="feature-check">✓</span><span>導入時サポート</span></li>
+            <li><span class="feature-check">✓</span><span>継続的なサポート</span></li>
+          </ul>
+          <a href="#contact" class="btn btn-primary pricing-btn">まずは無料で試す</a>
+        </div>
+
+        <div class="pricing-info" data-delay="150">
+          <div class="info-item">
+            <div class="info-icon">🆓</div>
+            <h3>無料トライアル</h3>
+            <p>導入前に無料でお試しいただけます。費用ゼロで使用感をご確認ください。</p>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">💬</div>
+            <h3>料金はご相談可能</h3>
+            <p>施設の規模や状況に応じて柔軟に対応します。まずはお気軽にご相談ください。</p>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🤝</div>
+            <h3>丁寧なサポート</h3>
+            <p>導入から運用まで、担当者が直接サポートします。IT苦手な方も安心です。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧ 開発者情報 -->
+  <section class="developer" id="developer">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">ABOUT</span>
+        <h2 class="section-title">開発者について</h2>
+      </div>
+
+      <div class="developer-card" data-delay="0">
+        <div class="developer-avatar">
+          <img src="images/profile.png" alt="松田卓也 - 現役介護士・ATRI AI開発者" class="avatar-photo">
+          <div class="avatar-glow"></div>
+        </div>
+        <div class="developer-info">
+          <div class="company-name">ATRI AI</div>
+          <div class="developer-name-row">
+            <h3 class="developer-name">松田 卓也</h3>
+            <span class="developer-field-badge">現役介護士・開発者</span>
+          </div>
+          <p class="developer-role">代表・開発者 ／ 現役介護士</p>
+          <blockquote class="developer-quote">
+            「介護現場で実際に感じた課題を解決したい」<br>
+            そんな思いから開発しています。<br><br>
+            シフト作成に追われ、本来の介護業務に集中できない仲間を見てきました。
+            テクノロジーの力で、介護現場をもっと働きやすくしたい。
+            その一心で、この介護シフトAIを開発しました。
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑨ お問い合わせ -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">CONTACT</span>
+        <h2 class="section-title">まずはお気軽に<br>ご連絡ください</h2>
+        <p class="section-desc">無料トライアルのお申し込み・ご質問はこちらから</p>
+      </div>
+
+      <div class="contact-cards">
+        <a href="mailto:shift.ai.atri@gmail.com" class="contact-card" data-delay="0">
+          <div class="contact-icon">✉️</div>
+          <h3>メール</h3>
+          <p>shift.ai.atri@gmail.com</p>
+          <span class="contact-link">メールを送る →</span>
+        </a>
+        <a href="https://www.instagram.com/atri_ai_shift" target="_blank" rel="noopener" class="contact-card" data-delay="150">
+          <div class="contact-icon">📸</div>
+          <h3>Instagram</h3>
+          <p>@atri_ai_shift</p>
+          <span class="contact-link">フォローする →</span>
+        </a>
+        <div class="contact-card contact-card-line" data-delay="300">
+          <div class="contact-icon">💬</div>
+          <h3>LINE 公式アカウント</h3>
+          <p>QRコードを読み取って友だち追加</p>
+          <img src="images/line-qr.png" alt="LINE QRコード" class="line-qr-img">
+          <span class="contact-link">友だち追加 →</span>
+        </div>
+      </div>
+
+      <div class="contact-cta" data-delay="200">
+        <h3>無料トライアルを始める</h3>
+        <p>まずはお問い合わせからスタートしましょう。お気軽にどうぞ。</p>
+        <a href="mailto:shift.ai.atri@gmail.com" class="btn btn-primary btn-large">
+          <span>無料で試す</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo-wrap">
+            <img src="images/logo-dark.png" alt="ATRI AI ロゴ" class="logo-img-footer">
+          </div>
+          <p>介護現場のシフト作成をAIで革新する</p>
+        </div>
+        <nav class="footer-links">
+          <a href="#hero">トップ</a>
+          <a href="#problems">課題</a>
+          <a href="#service">サービス</a>
+          <a href="#features">特徴</a>
+          <a href="#pricing">料金</a>
+          <a href="#contact">お問い合わせ</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ATRI AI All Rights Reserved.</p>
+        <p class="footer-email">shift.ai.atri@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
