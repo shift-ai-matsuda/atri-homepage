@@ -157,11 +157,15 @@ window.addEventListener('load', function () {
     '.shift-stress-text':   'anim-fade-left',
     '.stress-photo-wrap':   'anim-fade-right',
     '.stress-alone-wrap':   'anim-fade-up',
+    '.ba-card':         'anim-fade-up',
+    '.ba-cta':          'anim-fade-up',
     '.problem-card':    'anim-fade-up',
     '.service-card':    'anim-fade-up',
     '.feature-item':    'anim-fade-left',
     '.features-visual': 'anim-fade-right',
     '.demo-card':       'anim-fade-up',
+    '.trust-item':      'anim-fade-up',
+    '.faq-item':        'anim-fade-up',
     '.flow-step':       'anim-fade-up',
     '.pricing-card':    'anim-fade-up',
     '.pricing-info':    'anim-fade-up',
@@ -255,7 +259,35 @@ window.addEventListener('load', function () {
 
 
 /* =====================================================
-   ⑧ スムーズスクロール（アンカーリンク共通処理）
+   ⑧ FAQアコーディオン
+   ===================================================== */
+(function initFaq() {
+  document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item   = this.closest('.faq-item');
+      var answer = item.querySelector('.faq-answer');
+      var isOpen = this.getAttribute('aria-expanded') === 'true';
+
+      /* 他を閉じる */
+      document.querySelectorAll('.faq-item').forEach(function (other) {
+        if (other !== item) {
+          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-answer').hidden = true;
+          other.classList.remove('faq-open');
+        }
+      });
+
+      /* トグル */
+      this.setAttribute('aria-expanded', String(!isOpen));
+      answer.hidden = isOpen;
+      item.classList.toggle('faq-open', !isOpen);
+    });
+  });
+})();
+
+
+/* =====================================================
+   ⑨ スムーズスクロール（アンカーリンク共通処理）
    ===================================================== */
 (function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
