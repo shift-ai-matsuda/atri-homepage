@@ -1762,6 +1762,161 @@ ul { list-style: none; }
 }
 
 /* =====================================================
+   Instagram ボタン
+   ===================================================== */
+.btn-instagram {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(220, 39, 67, 0.30);
+  gap: 8px;
+}
+.btn-instagram:hover {
+  filter: brightness(1.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(220, 39, 67, 0.40);
+}
+.btn-instagram svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   Instagram QRコード（お問い合わせカード内）
+   ===================================================== */
+.contact-card-insta .contact-icon {
+  font-size: 0;  /* 絵文字は非表示、SVGに切り替え */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.insta-icon-svg {
+  width: 48px;
+  height: 48px;
+  color: #dc2743;
+}
+.insta-qr-img {
+  display: block;
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin: 0 auto 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   フッター：Instagram QR & SNSボタン行
+   ===================================================== */
+.footer-sns-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.footer-sns-btn {
+  padding: 10px 18px;
+  font-size: 13px;
+}
+
+.footer-insta-qr {
+  margin-top: 14px;
+}
+.footer-insta-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.footer-insta-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: #dc2743;
+}
+.footer-insta-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+.footer-insta-handle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.footer-insta-qr-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: block;
+}
+
+/* =====================================================
+   固定SNSボタン（右下フローティング）
+   ===================================================== */
+.float-sns {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.float-sns-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: var(--r-full);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s;
+  white-space: nowrap;
+}
+.float-sns-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.float-sns-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.float-sns-line  { background: #06C755; }
+.float-sns-line:hover { background: #05b34c; }
+
+.float-sns-insta {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.float-sns-label { font-size: 13px; font-weight: 700; }
+
+@media (max-width: 768px) {
+  .float-sns { right: 14px; bottom: 18px; gap: 8px; }
+  .float-sns-btn { padding: 11px 14px; font-size: 12px; }
+  .float-sns-label { display: none; }   /* スマホはアイコンのみ */
+  .float-sns-btn { width: 48px; height: 48px; justify-content: center; padding: 0; border-radius: 50%; }
+
+  /* Instagram CTA ボタン：スマホ縦並び */
+  .contact-cta-buttons .btn-instagram { max-width: 320px; width: 100%; justify-content: center; }
+
+  /* フッター SNS */
+  .footer-sns-row { flex-direction: column; }
+  .footer-sns-btn { width: 100%; justify-content: center; }
+  .footer-insta-qr-img { width: 88px; height: 88px; }
+  .insta-qr-img { width: 120px; height: 120px; }
+}
+
+/* =====================================================
    ヒーロー：数値メトリック
    ===================================================== */
 .hero-metric {
