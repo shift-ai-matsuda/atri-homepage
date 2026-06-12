@@ -1226,7 +1226,22 @@ ul { list-style: none; }
 }
 .demo-card-mobile .demo-screen {
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
+}
+.demo-screen-mobile-photo {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  padding: 0;
+}
+.demo-screenshot-mobile {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+  border-radius: 0;
+}
+.demo-card:hover .demo-screenshot-mobile {
+  transform: scale(1.02);
 }
 
 .demo-card { display: flex; flex-direction: column; }
