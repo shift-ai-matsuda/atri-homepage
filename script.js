@@ -290,10 +290,10 @@ window.addEventListener('load', function () {
    ⑨ お問い合わせフォーム
    ===================================================== */
 (function initContactForm() {
-  /* ★ Formspree セットアップ後にここを更新してください ★
-     手順: https://formspree.io → New Form → shift.ai.atri@gmail.com を設定
-           → フォームIDをコピーして YOUR_FORM_ID と置き換える             */
-  var ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+  /* 送信先: Cloudflare Pages Function（同一ドメイン）
+     → Render API (/api/contact-public) へ中継
+     → Gmail SMTP でメール送信                    */
+  var ENDPOINT = '/api/contact';
 
   var toggleBtn  = document.getElementById('formToggleBtn');
   var formWrap   = document.getElementById('contactFormWrap');
@@ -375,29 +375,36 @@ window.addEventListener('load', function () {
     submitBtn.querySelector('.form-submit-loading').hidden = false;
 
     var payload = {
-      '_subject':      '【ATRI AI】ホームページからお問い合わせ',
-      '担当者名':       document.getElementById('cf-name').value.trim(),
-      '施設名':         document.getElementById('cf-facility').value.trim(),
-      'メールアドレス': document.getElementById('cf-email').value.trim(),
-      '電話番号':       document.getElementById('cf-tel').value.trim(),
-      'お問い合わせ内容': document.getElementById('cf-message').value.trim()
+      name:     document.getElementById('cf-name').value.trim(),
+      facility: document.getElementById('cf-facility').value.trim(),
+      email:    document.getElementById('cf-email').value.trim(),
+      tel:      document.getElementById('cf-tel').value.trim(),
+      message:  document.getElementById('cf-message').value.trim()
     };
+
+    console.log('[ATRI Form] 送信開始:', ENDPOINT);
 
     fetch(ENDPOINT, {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body:    JSON.stringify(payload)
     })
     .then(function (res) {
+      console.log('[ATRI Form] HTTPステータス:', res.status);
       if (res.ok) {
+        console.log('[ATRI Form] 送信成功');
         formEl.hidden = true;
         successBox.hidden = false;
         successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
-        return res.json().then(function () { throw new Error(); });
+        return res.text().then(function (body) {
+          console.error('[ATRI Form] 送信失敗 status=' + res.status + ' body=' + body);
+          throw new Error('status ' + res.status);
+        });
       }
     })
-    .catch(function () {
+    .catch(function (err) {
+      console.error('[ATRI Form] エラー:', err);
       submitBtn.disabled = false;
       submitBtn.querySelector('.form-submit-label').hidden = false;
       submitBtn.querySelector('.form-submit-arrow').hidden = false;
