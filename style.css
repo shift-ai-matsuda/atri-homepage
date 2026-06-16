@@ -1202,40 +1202,42 @@ ul { list-style: none; }
    ===================================================== */
 .demo { padding: var(--section-py) 0; background: rgba(255, 255, 255, 0.91); }
 
-/* 上段：シフト表(大) ＋ 集計表(小) ／ 下段：スマホ(中央) */
+/* 3列横並び：シフト表 ／ 集計表 ／ スマホ画面 */
 .demo-grid {
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
   gap: 28px;
 }
 
-/* 上段左：シフト表（大きめ） */
+/* 左：シフト表 */
 .demo-card-shift  { grid-column: 1; grid-row: 1; }
 
-/* 上段右：集計表 */
+/* 中央：集計表 */
 .demo-card-summary { grid-column: 2; grid-row: 1; }
 
-/* 下段：スマホUI — 全幅スパンして中央寄せ */
+/* 右：スマホ画面 */
 .demo-card-mobile {
-  grid-column: 1 / -1;
-  grid-row: 2;
+  grid-column: 3;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 .demo-card-mobile .demo-screen {
   width: 100%;
-  max-width: 360px;
+  max-width: 100%;
 }
 .demo-screen-mobile-photo {
-  border-radius: var(--r-lg);
+  border-radius: var(--r-md);
   overflow: hidden;
   padding: 0;
 }
 .demo-screenshot-mobile {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
   display: block;
   transition: transform 0.4s ease;
   border-radius: 0;
@@ -1349,11 +1351,14 @@ ul { list-style: none; }
   padding: 0;
   display: block;
   overflow: hidden;
+  aspect-ratio: 16 / 10;
 }
 
 .demo-screenshot {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
   display: block;
   transition: transform 0.4s ease;
 }
@@ -2464,7 +2469,7 @@ ul { list-style: none; }
     grid-template-rows: auto;
     gap: 16px;
   }
-  .demo-card-shift,
+  .demo-card-shift   { grid-column: 1; grid-row: auto; }
   .demo-card-summary { grid-column: 1; grid-row: auto; }
   .demo-card-mobile  { grid-column: 1; grid-row: auto; align-items: stretch; }
   .demo-card-mobile .demo-screen { max-width: 100%; }
@@ -2474,7 +2479,15 @@ ul { list-style: none; }
     width: 100%;
     max-width: 100%;
   }
-  .demo-screenshot   { border-radius: 0; }
+  /* スマホ縦並び時は aspect-ratio を解除して自然な高さに */
+  .demo-screen-photo {
+    aspect-ratio: auto;
+  }
+  .demo-screenshot,
+  .demo-screenshot-mobile {
+    height: auto;
+    object-fit: unset;
+  }
 
   /* ---- 料金 ---- */
   .pricing-cards { grid-template-columns: 1fr; }
