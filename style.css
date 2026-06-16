@@ -1202,12 +1202,13 @@ ul { list-style: none; }
    ===================================================== */
 .demo { padding: var(--section-py) 0; background: rgba(255, 255, 255, 0.91); }
 
-/* 3列横並び：シフト表 ／ 集計表 ／ スマホ画面 */
+/* 3列横並び：シフト表 ／ 集計表 ／ スマホ画面（下揃え） */
 .demo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 28px;
+  align-items: end;
 }
 
 /* 左：シフト表 */
@@ -1216,34 +1217,122 @@ ul { list-style: none; }
 /* 中央：集計表 */
 .demo-card-summary { grid-column: 2; grid-row: 1; }
 
-/* 右：スマホ画面 */
+/* 右：スマホ画面（iPhoneフレーム） */
 .demo-card-mobile {
   grid-column: 3;
   grid-row: 1;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
 }
-.demo-card-mobile .demo-screen {
-  width: 100%;
-  max-width: 100%;
+
+/* ---- iPhone フレーム ---- */
+.iphone-frame-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 16px;
 }
-.demo-screen-mobile-photo {
-  border-radius: var(--r-md);
+
+.iphone-frame {
+  position: relative;
+  width: 220px;
+  background: #1c1c1e;
+  border-radius: 46px;
+  padding: 18px 10px 12px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    0 0 0 2px #3d3d3f,
+    0 40px 100px rgba(0, 0, 0, 0.50),
+    0 16px 40px rgba(0, 0, 0, 0.28);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* 電源ボタン（右） */
+.iphone-frame::before {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 100px;
+  width: 3px;
+  height: 56px;
+  background: #3d3d3f;
+  border-radius: 0 3px 3px 0;
+}
+
+/* 音量ボタン（左 × 2） */
+.iphone-frame::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 80px;
+  width: 3px;
+  height: 34px;
+  background: #3d3d3f;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 50px 0 #3d3d3f;
+}
+
+.demo-card-mobile:hover .iphone-frame {
+  transform: translateY(-8px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10),
+    0 0 0 2px #3d3d3f,
+    0 56px 120px rgba(0, 0, 0, 0.55),
+    0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
+.iphone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 28px;
+  background: #1c1c1e;
+  border-radius: 0 0 20px 20px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.iphone-speaker {
+  width: 40px;
+  height: 4px;
+  background: #2c2c2e;
+  border-radius: 2px;
+}
+
+.iphone-camera {
+  width: 11px;
+  height: 11px;
+  background: #2c2c2e;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.05);
+}
+
+.iphone-screen-inner {
+  background: #000;
+  border-radius: 34px;
   overflow: hidden;
-  padding: 0;
 }
-.demo-screenshot-mobile {
+
+.iphone-screenshot {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
+  height: auto;
   display: block;
-  transition: transform 0.4s ease;
-  border-radius: 0;
 }
-.demo-card:hover .demo-screenshot-mobile {
-  transform: scale(1.02);
+
+.iphone-home-bar {
+  width: 76px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  margin: 10px auto 0;
 }
 
 .demo-card { display: flex; flex-direction: column; }
@@ -2468,11 +2557,11 @@ ul { list-style: none; }
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 16px;
+    align-items: start;
   }
   .demo-card-shift   { grid-column: 1; grid-row: auto; }
   .demo-card-summary { grid-column: 1; grid-row: auto; }
-  .demo-card-mobile  { grid-column: 1; grid-row: auto; align-items: stretch; }
-  .demo-card-mobile .demo-screen { max-width: 100%; }
+  .demo-card-mobile  { grid-column: 1; grid-row: auto; align-items: center; }
   .demo-screen {
     border-radius: 16px;
     overflow: hidden;
@@ -2483,10 +2572,13 @@ ul { list-style: none; }
   .demo-screen-photo {
     aspect-ratio: auto;
   }
-  .demo-screenshot,
-  .demo-screenshot-mobile {
+  .demo-screenshot {
     height: auto;
     object-fit: unset;
+  }
+  /* スマホ表示では iPhone フレームを少し大きく */
+  .iphone-frame {
+    width: 240px;
   }
 
   /* ---- 料金 ---- */
@@ -2567,10 +2659,10 @@ ul { list-style: none; }
   .service-card p  { font-size: 13px; }
 
   /* ---- デモ ---- */
-  .demo-grid       { gap: 12px; }
-  .demo-screen     { border-radius: 12px; }
-  .demo-screen-center { padding: 16px 0; }
-  .demo-label      { font-size: 13px; margin-top: 4px; }
+  .demo-grid    { gap: 12px; }
+  .demo-screen  { border-radius: 12px; }
+  .demo-label   { font-size: 13px; margin-top: 4px; }
+  .iphone-frame { width: 200px; }
 
   /* ---- 料金 ---- */
   .pricing-card { padding: 32px 18px; }
