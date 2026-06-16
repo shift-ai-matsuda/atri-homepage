@@ -287,7 +287,129 @@ window.addEventListener('load', function () {
 
 
 /* =====================================================
-   ⑨ スムーズスクロール（アンカーリンク共通処理）
+   ⑨ お問い合わせフォーム
+   ===================================================== */
+(function initContactForm() {
+  /* ★ Formspree セットアップ後にここを更新してください ★
+     手順: https://formspree.io → New Form → shift.ai.atri@gmail.com を設定
+           → フォームIDをコピーして YOUR_FORM_ID と置き換える             */
+  var ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+  var toggleBtn  = document.getElementById('formToggleBtn');
+  var formWrap   = document.getElementById('contactFormWrap');
+  var formEl     = document.getElementById('contactFormEl');
+  var submitBtn  = document.getElementById('formSubmitBtn');
+  var successBox = document.getElementById('formSuccessBox');
+  var failBox    = document.getElementById('formFailBox');
+
+  if (!toggleBtn || !formWrap || !formEl) return;
+
+  /* ---- フォーム 開閉 ---- */
+  toggleBtn.addEventListener('click', function () {
+    var isOpen = formWrap.classList.toggle('form-open');
+    this.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      setTimeout(function () {
+        formWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
+    }
+  });
+
+  /* ---- バリデーション ---- */
+  function setError(fieldId, msg) {
+    var el = document.getElementById('err-' + fieldId);
+    var input = document.getElementById('cf-' + fieldId);
+    if (el)    el.textContent = msg;
+    if (input) input.classList.add('input-error');
+  }
+  function clearError(fieldId) {
+    var el = document.getElementById('err-' + fieldId);
+    var input = document.getElementById('cf-' + fieldId);
+    if (el)    el.textContent = '';
+    if (input) input.classList.remove('input-error');
+  }
+
+  /* リアルタイムエラークリア */
+  ['name', 'facility', 'email', 'tel', 'message'].forEach(function (id) {
+    var input = document.getElementById('cf-' + id);
+    if (input) input.addEventListener('input', function () { clearError(id); });
+  });
+
+  function validate() {
+    var ok       = true;
+    var name     = document.getElementById('cf-name').value.trim();
+    var facility = document.getElementById('cf-facility').value.trim();
+    var email    = document.getElementById('cf-email').value.trim();
+    var tel      = document.getElementById('cf-tel').value.trim();
+    var message  = document.getElementById('cf-message').value.trim();
+
+    clearError('name'); clearError('facility'); clearError('email');
+    clearError('tel');  clearError('message');
+
+    if (!name)     { setError('name',     '担当者名を入力してください'); ok = false; }
+    if (!facility) { setError('facility', '施設名を入力してください');   ok = false; }
+    if (!email) {
+      setError('email', 'メールアドレスを入力してください'); ok = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('email', '正しいメールアドレス形式で入力してください'); ok = false;
+    }
+    if (!tel) {
+      setError('tel', '電話番号を入力してください'); ok = false;
+    } else if (!/^[\d\-\+\(\)\s]{7,20}$/.test(tel)) {
+      setError('tel', '正しい電話番号を入力してください（例：090-1234-5678）'); ok = false;
+    }
+    if (!message) { setError('message', '質問事項・相談内容を入力してください'); ok = false; }
+
+    return ok;
+  }
+
+  /* ---- 送信 ---- */
+  formEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    /* ローディング状態 */
+    submitBtn.disabled = true;
+    submitBtn.querySelector('.form-submit-label').hidden = true;
+    submitBtn.querySelector('.form-submit-arrow').hidden = true;
+    submitBtn.querySelector('.form-submit-loading').hidden = false;
+
+    var payload = {
+      '_subject':      '【ATRI AI】ホームページからお問い合わせ',
+      '担当者名':       document.getElementById('cf-name').value.trim(),
+      '施設名':         document.getElementById('cf-facility').value.trim(),
+      'メールアドレス': document.getElementById('cf-email').value.trim(),
+      '電話番号':       document.getElementById('cf-tel').value.trim(),
+      'お問い合わせ内容': document.getElementById('cf-message').value.trim()
+    };
+
+    fetch(ENDPOINT, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify(payload)
+    })
+    .then(function (res) {
+      if (res.ok) {
+        formEl.hidden = true;
+        successBox.hidden = false;
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        return res.json().then(function () { throw new Error(); });
+      }
+    })
+    .catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.querySelector('.form-submit-label').hidden = false;
+      submitBtn.querySelector('.form-submit-arrow').hidden = false;
+      submitBtn.querySelector('.form-submit-loading').hidden = true;
+      failBox.hidden = false;
+    });
+  });
+})();
+
+
+/* =====================================================
+   ⑩ スムーズスクロール（アンカーリンク共通処理）
    ===================================================== */
 (function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {

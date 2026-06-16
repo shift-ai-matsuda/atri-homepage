@@ -940,6 +940,79 @@
         </div>
       </div>
 
+      <!-- お問い合わせフォーム -->
+      <div class="contact-form-section">
+        <button class="contact-form-toggle" id="formToggleBtn" aria-expanded="false" aria-controls="contactFormWrap">
+          <svg class="form-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>お問い合わせフォームを開く</span>
+          <svg class="form-toggle-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+
+        <div class="contact-form-wrap" id="contactFormWrap">
+          <form class="contact-form" id="contactFormEl" novalidate>
+            <p class="form-note"><span class="form-required-mark">必須</span> のついた項目はすべて入力してください</p>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-name">担当者名 <span class="form-required-mark">必須</span></label>
+              <input class="form-input" type="text" id="cf-name" name="担当者名" placeholder="例：山田 花子" required autocomplete="name">
+              <p class="form-error-msg" id="err-name" role="alert" aria-live="polite"></p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-facility">施設名 <span class="form-required-mark">必須</span></label>
+              <input class="form-input" type="text" id="cf-facility" name="施設名" placeholder="例：〇〇介護センター" required autocomplete="organization">
+              <p class="form-error-msg" id="err-facility" role="alert" aria-live="polite"></p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-email">メールアドレス <span class="form-required-mark">必須</span></label>
+              <input class="form-input" type="email" id="cf-email" name="メールアドレス" placeholder="例：yamada@example.com" required autocomplete="email">
+              <p class="form-error-msg" id="err-email" role="alert" aria-live="polite"></p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-tel">電話番号 <span class="form-required-mark">必須</span></label>
+              <input class="form-input" type="tel" id="cf-tel" name="電話番号" placeholder="例：090-1234-5678" required autocomplete="tel">
+              <p class="form-error-msg" id="err-tel" role="alert" aria-live="polite"></p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-message">質問事項・相談内容 <span class="form-required-mark">必須</span></label>
+              <textarea class="form-input form-textarea" id="cf-message" name="お問い合わせ内容" placeholder="ご質問やご相談内容をご記入ください（例：スタッフ数や現在のシフト管理方法など）" required rows="6"></textarea>
+              <p class="form-error-msg" id="err-message" role="alert" aria-live="polite"></p>
+            </div>
+
+            <input type="hidden" name="_subject" value="【ATRI AI】ホームページからお問い合わせ">
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-primary btn-large form-submit-btn" id="formSubmitBtn">
+                <span class="form-submit-label">無料相談を申し込む</span>
+                <svg class="form-submit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                <span class="form-submit-loading" hidden>送信中...</span>
+              </button>
+            </div>
+          </form>
+
+          <div class="form-result form-success-box" id="formSuccessBox" hidden>
+            <div class="form-result-icon">✅</div>
+            <h3 class="form-result-title">お問い合わせありがとうございます</h3>
+            <p class="form-result-text">内容を確認のうえ、折り返しご連絡いたします。</p>
+          </div>
+
+          <div class="form-result form-fail-box" id="formFailBox" hidden>
+            <div class="form-result-icon">⚠️</div>
+            <h3 class="form-result-title">送信に失敗しました</h3>
+            <p class="form-result-text">お手数ですがLINEまたはInstagramよりお問い合わせください。</p>
+          </div>
+        </div>
+      </div>
+
       <div class="contact-cta" data-delay="200">
         <h3>まずは無料デモを体験してください</h3>
         <p>施設名とメールアドレスだけで、すぐにお試しいただけます。費用は一切かかりません。</p>
