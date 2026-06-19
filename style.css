@@ -1680,12 +1680,27 @@ ul { list-style: none; }
 }
 .pricing-features li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   font-size: 14px;
   color: var(--color-text-muted);
+  line-height: 1.5;
 }
-.feature-check { color: var(--color-teal); font-weight: 700; font-size: 15px; }
+.feature-check {
+  color: var(--color-teal);
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.feature-note {
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  opacity: 0.75;
+  margin-top: 2px;
+  line-height: 1.5;
+}
 
 .pricing-btn { width: 100%; justify-content: center; }
 
