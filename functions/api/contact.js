@@ -25,8 +25,8 @@ export async function onRequestPost(context) {
 
   const { name, facility, email, tel, message } = body;
 
-  /* ---- バリデーション ---- */
-  if (!name || !facility || !email || !tel || !message) {
+  /* ---- バリデーション（message は任意） ---- */
+  if (!name || !facility || !email || !tel) {
     return Response.json({ error: '必須項目が不足しています' }, { status: 400, headers: corsHeaders });
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
