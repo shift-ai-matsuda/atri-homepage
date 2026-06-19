@@ -382,33 +382,21 @@ window.addEventListener('load', function () {
       message:  document.getElementById('cf-message').value.trim()
     };
 
-    console.log('=== [ATRI Form] 送信開始 ===');
-    console.log('[ATRI Form] URL:', ENDPOINT);
-    console.log('[ATRI Form] Payload:', JSON.stringify(payload));
-
     fetch(ENDPOINT, {
       method:  'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body:    JSON.stringify(payload)
     })
     .then(function (res) {
-      console.log('[ATRI Form] HTTPステータス:', res.status);
-      /* 成功・失敗にかかわらずレスポンス本文をテキストで読む */
-      return res.text().then(function (text) {
-        console.log('[ATRI Form] レスポンス本文:', text);
-        if (res.ok) {
-          console.log('[ATRI Form] 送信成功');
-          formEl.hidden = true;
-          successBox.hidden = false;
-          successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } else {
-          console.error('[ATRI Form] 送信失敗 status=' + res.status + ' body=' + text);
-          throw new Error('HTTP ' + res.status + ': ' + text);
-        }
-      });
+      if (res.ok) {
+        formEl.hidden = true;
+        successBox.hidden = false;
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        throw new Error('HTTP ' + res.status);
+      }
     })
-    .catch(function (err) {
-      console.error('[ATRI Form] catch エラー:', err.message || err);
+    .catch(function () {
       submitBtn.disabled = false;
       submitBtn.querySelector('.form-submit-label').hidden = false;
       submitBtn.querySelector('.form-submit-arrow').hidden = false;

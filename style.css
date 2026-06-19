@@ -2573,6 +2573,66 @@ ul { list-style: none; }
 }
 .feature-check-gold { color: var(--color-warm) !important; }
 
+/* ── プレミアムプラン（準備中）── */
+.pricing-card-coming-soon {
+  background: #f8fafc;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  opacity: 0.78;
+  pointer-events: none;
+}
+.pricing-card-coming-soon::before {
+  background: #cbd5e0;
+}
+.pricing-card-coming-soon:hover {
+  transform: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+.pricing-badge-coming-soon {
+  background: #94a3b8;
+}
+.pricing-name-muted {
+  color: #94a3b8;
+}
+.pricing-coming-soon-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding-top: 8px;
+}
+.pricing-coming-soon-status {
+  font-size: 16px;
+  font-weight: 800;
+  color: #64748b;
+  margin: 0;
+}
+.pricing-coming-soon-desc {
+  font-size: 14px;
+  line-height: 1.85;
+  color: #94a3b8;
+  margin: 0;
+}
+.pricing-coming-soon-label {
+  display: inline-block;
+  padding: 8px 22px;
+  background: rgba(148, 163, 184, 0.10);
+  border: 1.5px solid rgba(148, 163, 184, 0.30);
+  border-radius: var(--r-full);
+  font-size: 13px;
+  font-weight: 700;
+  color: #94a3b8;
+}
+.pricing-coming-soon-voice {
+  font-size: 12px;
+  color: #b0bec5;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 16px;
+  margin: 0;
+  width: 100%;
+}
+
 .pricing-trial-note {
   margin-top: 28px;
   text-align: center;
