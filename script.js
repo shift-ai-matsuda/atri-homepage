@@ -329,8 +329,8 @@ window.addEventListener('load', function () {
     if (input) input.classList.remove('input-error');
   }
 
-  /* リアルタイムエラークリア */
-  ['name', 'facility', 'email', 'tel', 'message'].forEach(function (id) {
+  /* リアルタイムエラークリア（必須項目のみ） */
+  ['name', 'facility', 'email', 'tel'].forEach(function (id) {
     var input = document.getElementById('cf-' + id);
     if (input) input.addEventListener('input', function () { clearError(id); });
   });
@@ -341,10 +341,8 @@ window.addEventListener('load', function () {
     var facility = document.getElementById('cf-facility').value.trim();
     var email    = document.getElementById('cf-email').value.trim();
     var tel      = document.getElementById('cf-tel').value.trim();
-    var message  = document.getElementById('cf-message').value.trim();
 
-    clearError('name'); clearError('facility'); clearError('email');
-    clearError('tel');  clearError('message');
+    clearError('name'); clearError('facility'); clearError('email'); clearError('tel');
 
     if (!name)     { setError('name',     '担当者名を入力してください'); ok = false; }
     if (!facility) { setError('facility', '施設名を入力してください');   ok = false; }
@@ -358,7 +356,6 @@ window.addEventListener('load', function () {
     } else if (!/^[\d\-\+\(\)\s]{7,20}$/.test(tel)) {
       setError('tel', '正しい電話番号を入力してください（例：090-1234-5678）'); ok = false;
     }
-    if (!message) { setError('message', '質問事項・相談内容を入力してください'); ok = false; }
 
     return ok;
   }
@@ -374,12 +371,26 @@ window.addEventListener('load', function () {
     submitBtn.querySelector('.form-submit-arrow').hidden = true;
     submitBtn.querySelector('.form-submit-loading').hidden = false;
 
+    /* 任意項目をmessageに集約 */
+    var facilityType = (document.getElementById('cf-facility-type')  || {value: ''}).value;
+    var staffCount   = (document.getElementById('cf-staff-count')    || {value: ''}).value;
+    var shiftMethod  = (document.getElementById('cf-shift-method')   || {value: ''}).value;
+    var freeText     = (document.getElementById('cf-message')        || {value: ''}).value.trim();
+    var desired      = Array.from(document.querySelectorAll('input[name="希望内容"]:checked')).map(function (c) { return c.value; });
+
+    var msgParts = [];
+    if (facilityType)    msgParts.push('【施設種別】' + facilityType);
+    if (staffCount)      msgParts.push('【利用予定人数】' + staffCount);
+    if (shiftMethod)     msgParts.push('【シフト作成方法】' + shiftMethod);
+    if (desired.length)  msgParts.push('【ご希望内容】' + desired.join('、'));
+    if (freeText)        msgParts.push('【現在困っていること】\n' + freeText);
+
     var payload = {
       name:     document.getElementById('cf-name').value.trim(),
       facility: document.getElementById('cf-facility').value.trim(),
       email:    document.getElementById('cf-email').value.trim(),
       tel:      document.getElementById('cf-tel').value.trim(),
-      message:  document.getElementById('cf-message').value.trim()
+      message:  msgParts.join('\n') || '（任意項目の回答なし）'
     };
 
     fetch(ENDPOINT, {

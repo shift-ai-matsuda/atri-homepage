@@ -1004,18 +1004,24 @@
 
         <div class="contact-form-wrap" id="contactFormWrap">
           <form class="contact-form" id="contactFormEl" novalidate>
-            <p class="form-note"><span class="form-required-mark">必須</span> のついた項目はすべて入力してください</p>
 
-            <div class="form-row">
-              <label class="form-label" for="cf-name">担当者名 <span class="form-required-mark">必須</span></label>
-              <input class="form-input" type="text" id="cf-name" name="担当者名" placeholder="例：山田 花子" required autocomplete="name">
-              <p class="form-error-msg" id="err-name" role="alert" aria-live="polite"></p>
+            <div class="form-header-block">
+              <h3 class="form-title-inner">無料相談・デモ申込み</h3>
+              <p class="form-desc-inner">ATRI AIは施設ごとの勤務ルールや運用方法に合わせて初期設定を行うため、導入前に簡単なヒアリングをお願いしております。<br><br>無理な営業は行いません。まずはお気軽にご相談ください。</p>
             </div>
+
+            <p class="form-note"><span class="form-required-mark">必須</span> のついた項目はすべて入力してください</p>
 
             <div class="form-row">
               <label class="form-label" for="cf-facility">施設名 <span class="form-required-mark">必須</span></label>
               <input class="form-input" type="text" id="cf-facility" name="施設名" placeholder="例：〇〇介護センター" required autocomplete="organization">
               <p class="form-error-msg" id="err-facility" role="alert" aria-live="polite"></p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-name">担当者名 <span class="form-required-mark">必須</span></label>
+              <input class="form-input" type="text" id="cf-name" name="担当者名" placeholder="例：山田 花子" required autocomplete="name">
+              <p class="form-error-msg" id="err-name" role="alert" aria-live="polite"></p>
             </div>
 
             <div class="form-row">
@@ -1030,17 +1036,72 @@
               <p class="form-error-msg" id="err-tel" role="alert" aria-live="polite"></p>
             </div>
 
+            <div class="form-section-divider"><span>以下は任意項目です</span></div>
+
             <div class="form-row">
-              <label class="form-label" for="cf-message">質問事項・相談内容 <span class="form-required-mark">必須</span></label>
-              <textarea class="form-input form-textarea" id="cf-message" name="お問い合わせ内容" placeholder="ご質問やご相談内容をご記入ください（例：スタッフ数や現在のシフト管理方法など）" required rows="6"></textarea>
-              <p class="form-error-msg" id="err-message" role="alert" aria-live="polite"></p>
+              <label class="form-label" for="cf-facility-type">施設種別</label>
+              <select class="form-input form-select" id="cf-facility-type" name="施設種別">
+                <option value="">選択してください</option>
+                <option value="特別養護老人ホーム">特別養護老人ホーム</option>
+                <option value="介護老人保健施設">介護老人保健施設</option>
+                <option value="グループホーム">グループホーム</option>
+                <option value="有料老人ホーム">有料老人ホーム</option>
+                <option value="デイサービス">デイサービス</option>
+                <option value="その他">その他</option>
+              </select>
             </div>
 
-            <input type="hidden" name="_subject" value="【ATRI AI】ホームページからお問い合わせ">
+            <div class="form-row">
+              <label class="form-label" for="cf-staff-count">利用予定人数</label>
+              <select class="form-input form-select" id="cf-staff-count" name="利用予定人数">
+                <option value="">選択してください</option>
+                <option value="10名未満">10名未満</option>
+                <option value="10〜30名">10〜30名</option>
+                <option value="31〜50名">31〜50名</option>
+                <option value="51〜100名">51〜100名</option>
+                <option value="100名以上">100名以上</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-shift-method">現在のシフト作成方法</label>
+              <select class="form-input form-select" id="cf-shift-method" name="現在のシフト作成方法">
+                <option value="">選択してください</option>
+                <option value="Excel">Excel</option>
+                <option value="紙">紙</option>
+                <option value="既存シフトソフト">既存シフトソフト</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <p class="form-label">ご希望の内容（複数選択可）</p>
+              <div class="form-checkbox-group">
+                <label class="form-checkbox-label">
+                  <input type="checkbox" id="cf-demo" name="希望内容" value="無料デモ希望" class="form-checkbox">
+                  <span class="form-checkbox-text">無料デモ希望</span>
+                </label>
+                <label class="form-checkbox-label">
+                  <input type="checkbox" id="cf-consult" name="希望内容" value="無料相談希望" class="form-checkbox">
+                  <span class="form-checkbox-text">無料相談希望</span>
+                </label>
+                <label class="form-checkbox-label">
+                  <input type="checkbox" id="cf-material" name="希望内容" value="資料請求希望" class="form-checkbox">
+                  <span class="form-checkbox-text">資料請求希望</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="cf-message">現在困っていること</label>
+              <textarea class="form-input form-textarea" id="cf-message" name="現在困っていること" placeholder="シフト作成でのお悩みや、ご質問があればご記入ください（任意）" rows="5"></textarea>
+            </div>
+
+            <input type="hidden" name="_subject" value="【ATRI AI】無料相談・デモ申込み">
 
             <div class="form-submit-row">
               <button type="submit" class="btn btn-primary btn-large form-submit-btn" id="formSubmitBtn">
-                <span class="form-submit-label">無料相談を申し込む</span>
+                <span class="form-submit-label">送信する</span>
                 <svg class="form-submit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -1052,7 +1113,7 @@
           <div class="form-result form-success-box" id="formSuccessBox" hidden>
             <div class="form-result-icon">✅</div>
             <h3 class="form-result-title">お問い合わせありがとうございます</h3>
-            <p class="form-result-text">内容を確認のうえ、折り返しご連絡いたします。</p>
+            <p class="form-result-text">内容を確認後、2営業日以内にご連絡いたします。<br><br>ATRI AIは施設ごとにカスタマイズして導入するため、ご相談内容を確認した上で最適な導入方法をご提案いたします。</p>
           </div>
 
           <div class="form-result form-fail-box" id="formFailBox" hidden>
