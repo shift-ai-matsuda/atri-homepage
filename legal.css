@@ -17,40 +17,81 @@ body {
   font-size: 16px;
 }
 
-/* ナビバー */
+/* ナビバー（index.htmlと同一デザイン） */
 .legal-nav {
-  background: #fff;
-  border-bottom: 1px solid rgba(59, 167, 216, 0.14);
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 12px rgba(59, 167, 216, 0.06);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(59, 167, 216, 0.14);
+  box-shadow: 0 2px 20px rgba(59, 167, 216, 0.08);
 }
 
-.legal-nav-logo {
-  font-size: 18px;
-  font-weight: 900;
-  color: #3BA7D8;
-  text-decoration: none;
-  letter-spacing: -0.02em;
-}
-
-.legal-nav-back {
-  margin-left: auto;
-  font-size: 13px;
-  color: #5E6B75;
-  text-decoration: none;
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 32px;
   display: flex;
   align-items: center;
-  gap: 4px;
-  transition: color 0.2s;
 }
 
-.legal-nav-back:hover { color: #3BA7D8; }
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  mix-blend-mode: multiply;
+}
+
+.logo-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1;
+}
+
+.logo-text {
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #333333;
+  line-height: 1;
+}
+
+.logo-text-ja {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #5E6B75;
+}
+
+.logo-accent { color: #3BA7D8; }
+
+@media (max-width: 768px) {
+  .nav-container { padding: 10px 16px; }
+  .logo-img      { height: 36px; }
+  .logo-text     { font-size: 18px; }
+  .logo-text-ja  { display: none; }
+}
+
+@media (max-width: 480px) {
+  .logo-img      { height: 32px; }
+  .logo-text     { font-size: 16px; }
+  .nav-container { padding: 10px 14px; }
+  .logo-text-wrap { gap: 0; }
+}
 
 /* メインコンテンツ */
 .legal-main {
