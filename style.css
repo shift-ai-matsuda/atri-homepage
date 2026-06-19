@@ -980,6 +980,70 @@ ul { list-style: none; }
 }
 
 /* =====================================================
+   選ばれる理由
+   ===================================================== */
+.why-us {
+  padding: 96px 0;
+  background: linear-gradient(180deg, #EAF8FF 0%, #F7FCFF 100%);
+}
+
+.why-us-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.why-us-card {
+  background: #fff;
+  border: 1px solid rgba(59, 167, 216, 0.14);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 20px rgba(59, 167, 216, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.why-us-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(59, 167, 216, 0.13);
+}
+
+.why-us-icon-wrap {
+  width: 56px;
+  height: 56px;
+  background: rgba(59, 167, 216, 0.09);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  font-size: 26px;
+}
+
+.why-us-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.why-us-desc {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.9;
+}
+
+.why-us-note {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  border-top: 1px solid rgba(59, 167, 216, 0.12);
+  padding-top: 28px;
+  letter-spacing: 0.02em;
+}
+
+/* =====================================================
    ③ サービス説明
    ===================================================== */
 .service {
@@ -3056,6 +3120,11 @@ ul { list-style: none; }
   .iphone-frame {
     width: 240px;
   }
+
+  /* ---- 選ばれる理由 ---- */
+  .why-us             { padding: 64px 0; }
+  .why-us-grid        { grid-template-columns: 1fr; gap: 16px; }
+  .why-us-card        { padding: 24px 20px; }
 
   /* ---- 事前相談ボックス ---- */
   .consultation-box   { padding: 28px 20px; }
